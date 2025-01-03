@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct AiluroApp: App {
@@ -13,5 +14,7 @@ struct AiluroApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: CatData.self)
+
     }
 }
