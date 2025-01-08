@@ -70,10 +70,17 @@ struct LetterWidthSize: View {
 }
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var context
+    
+    //Animation variables
     @State var rotationA = 0.0
     @State var rotationB = 0.0
     @State var rotationC = 0.0
+    
+    //Manage pop-up
+    @State var isWhatPopped = false
+    
+    //Update data operations
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         NavigationStack{
@@ -81,7 +88,7 @@ struct ContentView: View {
                 Color.black
                     .ignoresSafeArea()
                 Rectangle()
-//                    .fill(Color.yellow) //TODO: temp
+                //                    .fill(Color.yellow) //TODO: temp
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 500, alignment: .center)
                     .opacity(0.0)
                     .overlay(
@@ -92,7 +99,7 @@ struct ContentView: View {
                                     .shadow(color: .black, radius: 6)
                                     .foregroundColor(Color.white)
                                     .frame(width: 295, height: 295)
-//                                    .padding()
+                                //                                    .padding()
                                     .zIndex(5)
                                 Image("ailuroCrash")
                                 //.fill(Color.blue)
@@ -110,10 +117,10 @@ struct ContentView: View {
                             }
                         }
                         , alignment: .bottomLeading
-                            )
-                        
+                    )
+                
                 Rectangle()
-//                    .fill(Color.purple) //TODO: temp
+                //                    .fill(Color.purple) //TODO: temp
                     .frame(minWidth: 500, maxWidth: 600, minHeight: 0, maxHeight: 300, alignment: .topTrailing)
                     .opacity(0.0)
                     .overlay(
@@ -205,16 +212,21 @@ struct ContentView: View {
                     .multilineTextAlignment(.center)
                     .padding()
                     Spacer()
-                        NavigationLink("What's AI?", destination: CrashView())
-                            .foregroundStyle(.yellow)
+                    Button(
+                        action: {
+                            isWhatPopped = true
+                        },
+                        label: {
+                            Text("What's AILURO?")
+                                .foregroundStyle(.yellow)
+                                .padding(.bottom, 8)
+                        }) // Share Button
+                    .popover(isPresented: $isWhatPopped, arrowEdge: .bottom){
+                        PopUpView()
+                    }
                 }
-//                Image("ailuroDraft")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .opacity(1.0)
             }
             .font(.system(size: 18, weight: .light, design: .monospaced))
-            //STACK WIDE FONT STYLE!
         }
         .navigationBarBackButtonHidden(true)
     }

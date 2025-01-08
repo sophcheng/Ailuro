@@ -29,9 +29,30 @@
 		E4E148F22D20E02400745701 /* AiluroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AiluroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E4640B1E2D29B5BE00DDCAD3 /* Exceptions for "Ailuro" folder in "AiluroTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/Preview Assets.xcassets",
+			);
+			target = E4E148E72D20E02400745701 /* AiluroTests */;
+		};
+		E4640B1F2D29B5BE00DDCAD3 /* Exceptions for "Ailuro" folder in "AiluroUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Preview Content/Preview Assets.xcassets",
+			);
+			target = E4E148F12D20E02400745701 /* AiluroUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E4E148DA2D20E02100745701 /* Ailuro */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4640B1E2D29B5BE00DDCAD3 /* Exceptions for "Ailuro" folder in "AiluroTests" target */,
+				E4640B1F2D29B5BE00DDCAD3 /* Exceptions for "Ailuro" folder in "AiluroUITests" target */,
+			);
 			path = Ailuro;
 			sourceTree = "<group>";
 		};
