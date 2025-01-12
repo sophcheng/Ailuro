@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import SwiftData
+//import SwiftData
 
 struct Buttons1View: View {
     
     //Identify which page
-    @State var pageIndex: Int
     @Binding var foot: FootData
     
     //Manage pop-ups
@@ -20,7 +19,7 @@ struct Buttons1View: View {
     @State var shareImage = "ailuroDraft"
     
     //Update whether heart was pressed
-    @Environment(\.modelContext) private var context
+//    @Environment(\.modelContext) private var context
     
     var body: some View {
         NavigationStack{
@@ -51,26 +50,31 @@ struct Buttons1View: View {
                                 .foregroundStyle(.green)
                         }) // "Comment" Button
                     .popover(isPresented: $isCommentPopped, arrowEdge: .top) {
+                        ZStack{
+//                            Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1))
+//                            Color.black
+                            LinearGradient(gradient: Gradient(colors: [ Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)), Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+                                .ignoresSafeArea()
                                 VStack{
                                     Text("Com-meow-nts")
                                         .fontWeight(.heavy)
+                                        .foregroundStyle(.white)
+                                        .font(.system(size: 18))
                                         .padding()
                                     Spacer()
                                     Group{
-                                        switch pageIndex {
+                                        switch foot.index {
                                         case 1:
                                             Comments1View()
+                                            
                                         case 2:
-                                            Text("Page 2 Comments")
+                                            Comments2View()
                                             
                                         case 3:
-                                            Text("Page 3 Comments")
-                                            
-                                        case 4:
-                                            Text("Page 4 Comments")
+                                            Comments3View()
                                             
                                         default:
-                                            Text("Page 0 Comments")
+                                            Comments4View()
                                         }
                                     }
                                     .frame(width: 300)
@@ -78,30 +82,31 @@ struct Buttons1View: View {
                                     Spacer()
                                 }
                             }
+                    }
 
                     .padding()
-                    Button(
-                        action: {
-//                            decideImage()
-                            isSharePopped = true
-                        },
-                        label: {
-                            Image(systemName: "square.and.arrow.up.fill")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(height: 45)
-                                .foregroundStyle(.blue)
-                        }) // Share Button
-                    .popover(isPresented: $isSharePopped, arrowEdge: .bottom){
-                        Text("TODO")
-                    }
-                    .padding()
+//                    Button(
+//                        action: {
+////                            decideImage()
+//                            isSharePopped = true
+//                        },
+//                        label: {
+//                            Image(systemName: "square.and.arrow.up.fill")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .frame(height: 45)
+//                                .foregroundStyle(.blue)
+//                        }) // Share Button
+//                    .popover(isPresented: $isSharePopped, arrowEdge: .bottom){
+//                        Text("TODO")
+//                    }
+//                    .padding()
                     NavigationLink(destination: ContentView()){
                         Image(systemName: "house.circle")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 50, height: 50)
-                            .foregroundStyle(.yellow)
+                            .foregroundStyle(.blue)
 
                     }
                     .padding()
@@ -113,17 +118,17 @@ struct Buttons1View: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .onTapGesture(count: 2,
-                      perform: {
-            heartPressed()
-        })
+//        .onTapGesture(count: 2,
+//                      perform: {
+//            heartPressed()
+//        })
     }
     
     func heartPressed() {
         self.foot.isHearted.toggle()
     }
 //    func decideImage(){
-//        switch pageIndex {
+//        switch foot.index {
 //        case 1:
 //            shareImage = "ailuroCat"
 //        case 2:
@@ -147,5 +152,5 @@ struct Buttons1View: View {
 }
 
 #Preview {
-    Buttons1View(pageIndex: 1, foot: .constant(FootData()))
+    Buttons1View(foot: .constant(FootData(index: 1)))
 }

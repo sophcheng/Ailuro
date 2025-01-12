@@ -10,7 +10,6 @@ import SwiftData
 
 struct ChatView: View {
 
-    //Specify path with backslash
     @StateObject var vm = ChatViewModel()
     
     //Header image
@@ -24,7 +23,7 @@ struct ChatView: View {
     @State var litterIndex = 0
     @State var canAdvance = false
     @State var isLocked = false
-    let maxCount = 5
+    let maxCount = 6
     
     //Game stats
     @State var work = 0
@@ -39,17 +38,6 @@ struct ChatView: View {
         "Meowfficial",
         "Purrson"
     ]
-    
-    var litterStat: [String: [Int]] {
-        return [
-            "MIT-10s": [Int.random(in: 8..<10), 10],
-            "CatGPT": [Int.random(in: 5..<10), 7],
-            "Kitt-E": [Int.random(in: 0..<10), 6],
-            "Boss": [Int.random(in: 8..<10), 5],
-            "Meowfficial": [Int.random(in: 3..<6), 4],
-            "Purrson": [Int.random(in: 0..<10), 3]
-        ]
-    }
 
     //Update data operations
     @Environment(\.modelContext) private var context
@@ -90,7 +78,7 @@ struct ChatView: View {
                     List {
                         ForEach (cats) { cat in
                             Text(cat.name)
-                                .foregroundStyle((litter.firstIndex(of: cat.name) ?? 0) < 3 ? Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)) : Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
+                                .foregroundStyle(cat.isAI() ? Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)) : Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
                                 .fontWeight(.heavy)
                         }
                         .onDelete { indices in
@@ -204,13 +192,12 @@ struct ChatView: View {
     func lockCats() -> Bool {
         if(count > 0){
             for cat in cats {
-                work += litterStat[cat.name]?[0] ?? 0
-                envCost += litterStat[cat.name]?[1] ?? 0
-                print("\(cat.name) W: \(litterStat[cat.name]?[0] ?? 0)")
-                print("\(cat.name) E: \(litterStat[cat.name]?[1] ?? 0)")
+                work += cat.getWorkCost()
+                envCost += cat.getEnvCost()
+                print("\(cat.name) W: \(cat.getWorkCost()), E: \(cat.getEnvCost())")
             }
             print("LOCKED CATS")
-            print("Work: \(work) \nEnv Cost: \(envCost)")
+            print("Work: \(work) \nEnv Cost: \(envCost)\n")
         }
         canAdvance = true
         return count > 0
