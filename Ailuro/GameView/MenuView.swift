@@ -8,26 +8,28 @@
 import SwiftUI
 import SwiftData
 
-struct ChatView: View {
-
-    @StateObject var vm = ChatViewModel()
+struct MenuView: View {
     
     //Header image
-    @State var rotation = 0
+    @State var rotationA = 0
+    @State var rotationB = 0
+    @State var rotationC = 0
     
-    //Add Cat button
+    //Add Cat button style
     @State var listCol = Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1))
     @State var lab = "Hire a Cat or AI!"
     @State var addCol = Color.yellow
+    
+    //Add Cat button logic
     @State var count = 0
     @State var litterIndex = 0
+    
+    //Go button logic
     @State var canAdvance = false
     @State var isLocked = false
-    let maxCount = 6
     
-    //Game stats
-    @State var work = 0
-    @State var envCost = 0
+    //Max # of cats addable
+    let maxCount = 6
     
     //Cats to be added
     let litter = [
@@ -46,22 +48,49 @@ struct ChatView: View {
     @Query(sort: \CatData.name, order: .forward) var cats: [CatData]
     
     var body: some View {
+        
         NavigationStack{
             ZStack{
-                Color.black
+                LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)), .black, .black]), startPoint: .top, endPoint: .bottom)
                     .ignoresSafeArea()
+                Image("ailuroCrash")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .rotationEffect(.degrees(Double(rotationA)))
+                    .frame(width: 160)
+                    .position(x: 320, y:-5)
+                    .rotationEffect(.degrees(Double(rotationA)))
+                    .onAppear{
+                        withAnimation(.linear(duration: 30).repeatForever(autoreverses: false)){
+                            rotationA = 360
+                        }
+                    }
+
+                Image("ailuroWorld")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .shadow(radius: 30)
+                    .rotationEffect(.degrees(Double(rotationC)))
+                    .frame(width: 260)
+                    .position(x: 50, y: -50)
+                    .rotationEffect(.degrees(Double(rotationC)))
+                    .onAppear{
+                        withAnimation(.linear(duration: 20).repeatForever(autoreverses: false)){
+                            rotationC = 360
+                        }
+                    }
+
                 VStack{
                     Image("ailuroCat")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 80, height: 80)
+                            .frame(width: 80)
                         .foregroundStyle(.pink)
                         .fontWeight(.semibold)
-                        .rotationEffect(.degrees(Double(rotation)))
-//                        .scaleEffect(rotation % 2 == 0 ? 2 : 1.5)
+                        .rotationEffect(.degrees(Double(rotationB)))
                         .onAppear{
                             withAnimation(.linear(duration: 6).repeatForever()){
-                                rotation = 45
+                                rotationB = 45
                             }
                         }
                     VStack{
@@ -69,10 +98,11 @@ struct ChatView: View {
                             .fontWeight(.heavy)
                             .foregroundStyle(.yellow)
                             .padding(.bottom, 0.7)
-                        Text("(Earth, but with way more cats.)")
+                        Text("(Earth, but with more cats.)")
                             .padding(.bottom, 0.7)
-                            .multilineTextAlignment(.center)
+                        Text("Cats & AI are AILUROs. They do Clean Energy planning!")
                     }
+                    .multilineTextAlignment(.center)
                         .foregroundStyle(.white)
                         .padding()
                     List {
@@ -81,46 +111,28 @@ struct ChatView: View {
                                 .foregroundStyle(cat.isAI() ? Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)) : Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
                                 .fontWeight(.heavy)
                         }
-                        .onDelete { indices in
-                            for index in indices {
-                                vm.kickCat(cat: cats[index], context: context)
-                            }
-                            work = 0
-                            envCost = 0
-                            isLocked = false
-                            count = cats.count
-                            if(count == maxCount - 1){
-                                lab = "Click to add a cat!"
-                                addCol = Color.yellow
-                            }
-                        }
                     }
-                    .frame(height: 250)
+                    .frame(height: 170)
                         .listStyle(PlainListStyle())
                         .cornerRadius(10)
                     VStack{
-                        Text("Meet your 5 cat-workers:")
-                            .foregroundColor(.yellow)
+                        Text("Meet your employees:")
                         Text("some ailuro")
                             .foregroundStyle(Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
                             .fontWeight(.heavy)
                         + Text(", ")
-                            .foregroundStyle(.yellow)
                         + Text("some AI")
                             .foregroundStyle(Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)))
                             .fontWeight(.heavy)
                         + Text("!")
-                            .foregroundStyle(.yellow)
-                        Text("(swipe right to kick)")
-                            .italic()
                     }
+                    .foregroundColor(.yellow)
+                    .padding()
                     HStack{
                         Button(action:{
                             for kitty in cats{
-                                vm.kickCat(cat: kitty, context: context)
+                                kickCat(cat: kitty)
                             }
-                            work = 0
-                            envCost = 0
                             canAdvance = false
                             isLocked = false
                         }, label:{
@@ -139,7 +151,7 @@ struct ChatView: View {
                             if(count < maxCount){
                                 lab = "Hire a Cat or AI!"
                                 addCol = Color(.yellow)
-                                vm.addCat(name: litter[litterIndex], context: context)
+                                addCat(name: litter[litterIndex])
                                 count += 1
                             }
                             else{
@@ -169,7 +181,7 @@ struct ChatView: View {
                                 .opacity(canAdvance ? 1 : 0.5)
                                 .cornerRadius(50)
                         }
-                        .disabled(!canAdvance) // Adds cat
+                        .disabled(!canAdvance)
   
                     }
                     NavigationLink(destination: ContentView()){
@@ -184,48 +196,32 @@ struct ChatView: View {
                 }
                 .padding(40)
             }
-            //TODO: Could use tasks to randomly update state of the app?
             .font(.system(size: 16, weight: .semibold, design: .monospaced))
         }
         .navigationBarBackButtonHidden(true)
 }
     func lockCats() -> Bool {
-        if(count > 0){
-            for cat in cats {
-                work += cat.getWorkCost()
-                envCost += cat.getEnvCost()
-                print("\(cat.name) W: \(cat.getWorkCost()), E: \(cat.getEnvCost())")
-            }
-            print("LOCKED CATS")
-            print("Work: \(work) \nEnv Cost: \(envCost)\n")
-        }
         canAdvance = true
         return count > 0
     }
-}
-
-
-@Observable
-class ChatViewModel: ObservableObject{
-    func addCat(name: String, context: ModelContext){
+    func addCat(name: String){
+        
             //Create cat
             let cat = CatData(name: name)
+        
             //Add cat to data context
             context.insert(cat)
         do{
             try context.save()
-//            print("SAVED")
         }
         catch{
             print("Failed to save: \(error)")
         }
     }
-    
-    func kickCat(cat: CatData, context: ModelContext){
+    func kickCat(cat: CatData){
         context.delete(cat)
         do{
             try context.save()
-//            print("DELETED")
         }
         catch{
             print("Failed to save: \(error)")
@@ -234,5 +230,5 @@ class ChatViewModel: ObservableObject{
 }
 
 #Preview {
-    ChatView().modelContainer(for: CatData.self, inMemory: false)
+    MenuView().modelContainer(for: [CatData.self, FootData.self], inMemory: false)
 }

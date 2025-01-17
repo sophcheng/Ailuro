@@ -8,28 +8,57 @@
 import SwiftUI
 
 struct Page0View: View {
+    
+    //Store circular text's angle
+    @State var rotationA = 0.0
+    
     var body: some View {
+        
         ZStack{
-            Image("envDraft") //TODO: NIX
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .opacity(0.3)
+            Rectangle()
+                .fill(RadialGradient(gradient: Gradient(colors: [.black, Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)), Color(#colorLiteral(red: 0.9606881738, green: 0.4666238427, blue: 0.5169212222, alpha: 1))]), center: .center, startRadius: 1, endRadius: 400))
+                .frame(height: 650)
+                .cornerRadius(30)
+            
             VStack{
-                Text("For you . . . or is it?")
+                Text("Welcome to KitKot!")
                     .fontWeight(.heavy)
                     .multilineTextAlignment(.center)
+                    .foregroundStyle(.yellow)
                 Spacer()
-                //ChatGPT, Google Search, or apps like TikTok! (Recommendations are AI-enhanced!)
-                // (On AILURO, we have KitKot.)
-                //TODO: the cats you raise on AI-LURO, based on the work they do, affects the app's look?
-                Text("Artificial intelligence: where computers have human-like behavior. \n\nThis includes decision-making, pattern recognition, and translation (of languages, of senses (vision), etc.).")
-                Text("\nIt's in games, search engines, social media (on Planet AI-LURO, we use KitKot!) & more!")
-                Text("\nHow an AI thinks is obscure - we often let AI models find their own patterns/methods (unsupervised learning), so it's hard to know exactly what goes on behind thes scenes.")
-                Text("\nAI is like a cat: constantly observing its surroundings, ever evolving & with a touch of mysteriousness. (And some people are really afraid of them.)")
+
+                Text("Artificial intelligence: where computers have human-like behavior...")
+
+                ZStack{
+                CircularTextView(title: "AI is Decision-Making, Pattern Recognition, Translation, etc..", radius: 120, degrees: -35, kerning: 2)
+                    .font(.system(size: 16, weight: .bold, design: .monospaced))
+                    .shadow(color: .black, radius: 6)
+                    .foregroundColor(Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)))
+                    .frame(width: 295, height: 295)
+                    .rotationEffect(.degrees(rotationA))
+                    .onAppear{
+                        withAnimation(.linear(duration: 100).repeatForever(autoreverses: false)){
+                            rotationA = 360
+                        }
+                    }
+                    
+                Image("offCatP.click")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width:200)
+                    .cornerRadius(20)
+                }
+                .padding()
+                
+                Text("AI = a cat: observant, ever-evolving & kinda mysterious @_@ \n\n(And some people are really scared of them...)")
+                    .multilineTextAlignment(.center)
+                
                 Spacer()
             }
             .frame(width: 300, height: 750)
+            .foregroundStyle(.white)
         }
+
     }
 }
 

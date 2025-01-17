@@ -11,10 +11,12 @@ import SwiftData
 @Model
 class FootData {
     var id: String
+    var index: Int
     var isHearted: Bool
     
-    init() {
+    init(index: Int) {
         self.id = UUID().uuidString
+        self.index = index
         self.isHearted = false
     }
 }

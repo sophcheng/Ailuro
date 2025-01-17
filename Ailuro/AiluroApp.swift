@@ -14,7 +14,7 @@ struct AiluroApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: CatData.self)
+        .modelContainer(for: [CatData.self, FootData.self])
 
     }
 }

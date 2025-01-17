@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PopUpView: View {
+    
     var body: some View {
 
         TabView{
@@ -21,7 +22,7 @@ struct PopUpView: View {
                     .cornerRadius(20)
                     Image("ailuroDraft")
                         .frame(width: 320, height: 600)
-                        .opacity(0.5)
+                        .opacity(0.8)
                         .cornerRadius(20)
                         .padding()
                 VStack{
@@ -36,28 +37,11 @@ struct PopUpView: View {
                         .padding(.top, 30)
                         .fontWeight(.heavy)
                     Spacer()
-//                    Image(systemName: "pawprint.fill")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(width: 40)
-//                        .padding(.bottom, 15)
                 }
                 VStack{
-//                    ZStack{
-//                        Rectangle()
-//                            .cornerRadius(20)
-//                            .foregroundStyle(.white)
-//                        VStack{
-//                            Image(systemName:"cat.fill")
-//                            Text("What's 'AILURO' mean?")
-//                                .fontWeight(.heavy)
-//                            Text("'Ailuro' is Greek for 'cat', which you might recognize from 'ailurophobia' - a fear of cats.")
-//                                .padding()
-//                        }
-//                    }
-//                    .frame(width: 300, height: 200)
+
                     Image(systemName:"cat.fill")
-                    Text("What's 'AILURO' mean?")
+                    Text("What's 'AILURO' mean?\n")
                         .fontWeight(.heavy)
                     Text("'Ailuro' is ")
                     + Text("Greek for 'cat'")
@@ -84,7 +68,8 @@ struct PopUpView: View {
                 }
                 .fontWeight(.medium)
                 .frame(width: 300)
-            } // AILURO Definition
+                .shadow(radius: 10)
+            }
             ZStack{
                 Color.black
                     .ignoresSafeArea()
@@ -95,8 +80,11 @@ struct PopUpView: View {
                     .opacity(0.3)
                 VStack{
                     Image(systemName:"person.fill.questionmark")
-                    Text("Okay, cat is 'ailuro', and 'ailuro' starts with 'AI'...but where's the further connection?")
+                    Text("Okay, cat is 'ailuro', and 'ailuro' starts with 'AI'")
                         .fontWeight(.heavy)
+                    + Text ("...but where's the further connection?")
+                        .fontWeight(.heavy)
+                        .foregroundStyle(Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)))
                     Group{
                         Image(systemName:"questionmark")
                             .padding(.top, 10)
@@ -112,18 +100,17 @@ struct PopUpView: View {
                             .foregroundStyle(Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
                             .padding(.top, 10)
                         Text("AILURO")
-                            .foregroundStyle(Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
+                            .foregroundStyle(Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)))
                             .fontWeight(.heavy)
                         Text("seeks to demystify the AI field, presenting the paw-sitive, ne-gat(o)-ive, & nuanced impact of AI!")
-                            .foregroundStyle(Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1)))
-                            .fontWeight(.semibold)
+                        .foregroundStyle(Color.yellow)
+                            .fontWeight(.heavy)
                     
                 }
-                .foregroundStyle(.yellow)
+                .foregroundStyle(Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
                 .shadow(radius:10)
                 .frame(width: 300)
-                } // Deeper concept explanation
-            //TODO: Works cited?
+                }
         }
         .font(.system(size: 17, weight: .light, design: .monospaced))
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))

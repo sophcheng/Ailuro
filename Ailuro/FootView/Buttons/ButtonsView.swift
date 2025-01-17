@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
-//import SwiftData
+import SwiftData
 
-struct Buttons1View: View {
+struct ButtonsView: View {
+    
+    //View model
+    @StateObject var vm = KitKotViewModel()
     
     //Identify which page
     @Binding var foot: FootData
@@ -19,7 +22,7 @@ struct Buttons1View: View {
     @State var shareImage = "ailuroDraft"
     
     //Update whether heart was pressed
-//    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) private var context
     
     var body: some View {
         NavigationStack{
@@ -49,10 +52,9 @@ struct Buttons1View: View {
                                 .frame(height: 38)
                                 .foregroundStyle(.green)
                         }) // "Comment" Button
-                    .popover(isPresented: $isCommentPopped, arrowEdge: .top) {
+                    .sheet(isPresented: $isCommentPopped) {
                         ZStack{
-//                            Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1))
-//                            Color.black
+
                             LinearGradient(gradient: Gradient(colors: [ Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)), Color(#colorLiteral(red: 0.4549577832, green: 0.8366284966, blue: 0.7456832528, alpha: 1))]), startPoint: .top, endPoint: .bottom)
                                 .ignoresSafeArea()
                                 VStack{
@@ -70,11 +72,8 @@ struct Buttons1View: View {
                                         case 2:
                                             Comments2View()
                                             
-                                        case 3:
-                                            Comments3View()
-                                            
                                         default:
-                                            Comments4View()
+                                            Comments3View()
                                         }
                                     }
                                     .frame(width: 300)
@@ -85,22 +84,7 @@ struct Buttons1View: View {
                     }
 
                     .padding()
-//                    Button(
-//                        action: {
-////                            decideImage()
-//                            isSharePopped = true
-//                        },
-//                        label: {
-//                            Image(systemName: "square.and.arrow.up.fill")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(height: 45)
-//                                .foregroundStyle(.blue)
-//                        }) // Share Button
-//                    .popover(isPresented: $isSharePopped, arrowEdge: .bottom){
-//                        Text("TODO")
-//                    }
-//                    .padding()
+
                     NavigationLink(destination: ContentView()){
                         Image(systemName: "house.circle")
                             .resizable()
@@ -118,39 +102,14 @@ struct Buttons1View: View {
             .padding()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .onTapGesture(count: 2,
-//                      perform: {
-//            heartPressed()
-//        })
     }
     
     func heartPressed() {
         self.foot.isHearted.toggle()
+        vm.updateData(foot: foot, context: context)
     }
-//    func decideImage(){
-//        switch foot.index {
-//        case 1:
-//            shareImage = "ailuroCat"
-//        case 2:
-//            shareImage = "ailuroCrash"
-//        case 3:
-//            shareImage = "ailuroWorld"
-//        case 4:
-//            shareImage = "officeDraft"
-//        default:
-//            shareImage = "ailuroDraft"
-//        }
-//    }
-//    func sharePopover() -> some View{
-//        VStack{
-//            Text(shareImage)
-//            Image(shareImage)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//        }
-//    }
 }
 
 #Preview {
-    Buttons1View(foot: .constant(FootData(index: 1)))
+    ButtonsView(foot: .constant(FootData(index: 1)))
 }

@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct Comments1View: View {
+    
     var body: some View {
-            Group{
+        
+            ScrollView(showsIndicators: false){
+                
+                //Socks comments
                 ZStack{
                     Rectangle()
-                        .fill(Color.yellow)
+                        .fill(Color.white)
                         .cornerRadius(10)
                         .overlay(
                     HStack{
@@ -20,13 +24,36 @@ struct Comments1View: View {
                             Text("Socks")
                                 .padding(.leading, 15)
                                 .fontWeight(.heavy)
-                        Image("ailuroCat")
+                        Image("offCatO.click")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 50, height: 50)
                             .padding(.leading, 10)
                         }
-                    Text("data is used before (training), during (validation/testing), & after the creation process")
+                        Text("how an AI thinks is obscure! usually, the model finds their own patterns/methods (unsupervised learning), so it's hard to know exactly what happens bts")
+                        .padding()
+                    }
+                    , alignment: .leading)
+                        
+                }
+                .frame(height: 230)
+                ZStack{
+                    Rectangle()
+                        .fill(Color.white)
+                        .cornerRadius(10)
+                        .overlay(
+                    HStack{
+                        VStack{
+                            Text("Socks")
+                                .padding(.leading, 15)
+                                .fontWeight(.heavy)
+                        Image("offCatO")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 50, height: 50)
+                            .padding(.leading, 10)
+                        }
+                    Text("still, data's used b4 (training), during (validation/testing), & after the creation process")
                         .padding()
                     }
                     , alignment: .leading)
@@ -34,54 +61,59 @@ struct Comments1View: View {
                 }
                 .frame(height: 150)
                 
+                //Bob comments
                 ZStack{
                     Rectangle()
                         .fill(Color.yellow)
                         .cornerRadius(10)
                         .overlay(
                     HStack{
-                        VStack{
-                            Text("bob")
-                                .padding(.leading, 15)
-                                .fontWeight(.heavy)
-                            Image("ailuroCrash")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 50, height: 50)
-                                .padding(.leading, 10)
-                        }
                         Text("TRAINING NEVER REALLY STOPS! THE AI CONTINUOUSLY LEARNS & IMPROVES!!")
                             .padding()
-                        
-                    }
-                    , alignment: .leading)
-                }
-                .frame(height: 150)
-                ZStack{
-                    Rectangle()
-                        .fill(Color.yellow)
-                        .cornerRadius(10)
-                        .overlay(
-                    HStack{
                         VStack{
-                            Text("Socks")
-                                .padding(.leading, 15)
+                            Text("bob")
+                                .padding(.trailing, 15)
                                 .fontWeight(.heavy)
-                            Image("ailuroCat")
+                            Image("offCatP.click")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 50, height: 50)
-                                .padding(.leading, 10)
+                                .padding(.trailing, 10)
                         }
-                        Text("unlike u bob...")
-                            .padding()
+                        
                     }
-                    , alignment: .leading)
+                    , alignment: .trailing)
                 }
-                .frame(height: 100)
+                .frame(height: 130)
+                
+                //Socks retaliates
                 ZStack{
                     Rectangle()
-                        .fill(Color.yellow)
+                        .fill(Color.white)
+                        .cornerRadius(10)
+                        .overlay(
+                    HStack{
+                        Text("unlike u bob...")
+                            .padding()
+                        VStack{
+                            Text("Socks")
+                                .padding(.trailing, 15)
+                                .fontWeight(.heavy)
+                            Image("offCatO.emo")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 50, height: 50)
+                                .padding(.trailing, 10)
+                        }
+                    }
+                    , alignment: .trailing)
+                }
+                .frame(height: 100)
+                
+                //Boss comments
+                ZStack{
+                    Rectangle()
+                        .fill(Color(#colorLiteral(red: 0.9691733718, green: 0.34777385, blue: 0.5364941955, alpha: 1)))
                         .cornerRadius(10)
                         .overlay(
                     HStack{
@@ -89,7 +121,7 @@ struct Comments1View: View {
                             Text("Boss")
                                 .padding(.leading, 15)
                                 .fontWeight(.heavy)
-                            Image("ailuroWorld")
+                            Image("offCatB")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 50, height: 50)
@@ -97,6 +129,7 @@ struct Comments1View: View {
                         }
                         Text("Get back to work you two.")
                             .padding()
+                            .foregroundStyle(.white)
                     }
                     , alignment: .leading)
                 }

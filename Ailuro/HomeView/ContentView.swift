@@ -8,9 +8,10 @@
 import SwiftUI
 import SwiftData
 
+//Establish circular text format
 struct CircularTextView: View {
     @State private var letterWidths: [Int:Double] = [:]
-    //declares variable but doesn't assign value
+
     @State var title: String
     
     var lettersOffset: [(offset: Int, element: Character)] {
@@ -76,7 +77,7 @@ struct ContentView: View {
     @State var rotationB = 0.0
     @State var rotationC = 0.0
     
-    //Manage pop-up
+    //Manage popover
     @State var isWhatPopped = false
     
     //Update data operations
@@ -88,21 +89,18 @@ struct ContentView: View {
                 Color.black
                     .ignoresSafeArea()
                 Rectangle()
-                //                    .fill(Color.yellow) //TODO: temp
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 500, alignment: .center)
                     .opacity(0.0)
                     .overlay(
-                        NavigationLink(destination: CrashView()){
+                        NavigationLink(destination: KitKotView()){
                             ZStack{
                                 CircularTextView(title: "AI's footprint", radius: 120, degrees: -35, kerning: 2)
                                     .font(.system(size: 16, weight: .bold, design: .monospaced))
                                     .shadow(color: .black, radius: 6)
                                     .foregroundColor(Color.white)
                                     .frame(width: 295, height: 295)
-                                //                                    .padding()
                                     .zIndex(5)
                                 Image("ailuroCrash")
-                                //.fill(Color.blue)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 250)
@@ -120,7 +118,6 @@ struct ContentView: View {
                     )
                 
                 Rectangle()
-                //                    .fill(Color.purple) //TODO: temp
                     .frame(minWidth: 500, maxWidth: 600, minHeight: 0, maxHeight: 300, alignment: .topTrailing)
                     .opacity(0.0)
                     .overlay(
@@ -134,7 +131,6 @@ struct ContentView: View {
                                     .padding()
                                     .zIndex(5)
                                 Image("ailuroWorld")
-                                //.fill(Color.green)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 175)
@@ -155,7 +151,7 @@ struct ContentView: View {
                     .frame(minWidth: 0, maxWidth: 370, minHeight: 0, maxHeight: 600, alignment: .center)
                     .opacity(0.0)
                     .overlay(
-                        NavigationLink(destination: ChatView()){
+                        NavigationLink(destination: MenuView()){
                             ZStack{
                                 CircularTextView(title: "Planet AI-LURO", radius: 120, degrees: -30, kerning: 5)
                                     .font(.system(size: 17, weight: .bold, design: .monospaced))
@@ -165,12 +161,10 @@ struct ContentView: View {
                                     .padding()
                                     .zIndex(5)
                                 Image("ailuroCat")
-                                //.fill(Color.pink)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 120)
                                     .padding()
-                                //.shadow(color: Color.cyan, radius: 10, x: 0.5, y: 7.0)
                                     .rotationEffect(.degrees(rotationC))
                                     .onAppear{
                                         withAnimation(.linear(duration: 10).repeatForever()){
@@ -220,8 +214,8 @@ struct ContentView: View {
                             Text("What's AILURO?")
                                 .foregroundStyle(.yellow)
                                 .padding(.bottom, 8)
-                        }) // Share Button
-                    .popover(isPresented: $isWhatPopped, arrowEdge: .bottom){
+                        }) // About Pop-Up
+                    .sheet(isPresented: $isWhatPopped){
                         PopUpView()
                     }
                 }
@@ -233,5 +227,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView().modelContainer(for: CatData.self, inMemory: false)
+    ContentView().modelContainer(for: [CatData.self, FootData.self], inMemory: false)
 }
