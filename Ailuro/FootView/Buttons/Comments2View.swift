@@ -97,6 +97,7 @@ struct Comments2View: View {
                         .overlay(
                     HStack{
                         Text("i mean i still hv to fact check chatgpt w/ google. cuz yall like to make up info sometimes #gaslight")
+                            
                             .padding()
                         VStack{
                             Text("Socks")
@@ -109,6 +110,7 @@ struct Comments2View: View {
                                 .padding(.trailing, 10)
                         }
                     }
+                        .foregroundStyle(.black)
                     , alignment: .trailing)
                 }
                 .frame(height: 160)

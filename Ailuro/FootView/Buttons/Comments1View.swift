@@ -138,6 +138,7 @@ struct Comments1View: View {
             .frame(width: 280)
             .padding()
             .font(.system(size: 15, weight: .semibold, design: .monospaced))
+            .foregroundStyle(.black)
         }
 
     }

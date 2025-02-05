@@ -149,7 +149,7 @@ struct MenuView: View {
                             litterIndex = Int.random(in: 0..<6)
                             count = cats.count
                             if(count < maxCount){
-                                lab = "Hire a Cat or AI!"
+                                lab = "Click to hire!"
                                 addCol = Color(.yellow)
                                 addCat(name: litter[litterIndex])
                                 count += 1

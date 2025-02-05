@@ -148,7 +148,6 @@ struct OfficeView: View {
                 }
                 VStack{
                 Text("COR-PURR-ATE REVIEW:")
-                    .foregroundStyle(.black)
                     .fontWeight(.heavy)
                     HStack{
                         Text("Paw-er: \(totalWork),")
@@ -179,6 +178,7 @@ struct OfficeView: View {
             .font(.system(size: 16, weight: .semibold, design: .monospaced))
             .frame(height: 750)
     }
+    
     //Data Functions
     func fetchCats() -> [CatData]{
         let fetchDescriptor = FetchDescriptor<CatData>()

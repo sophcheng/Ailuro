@@ -29,9 +29,9 @@ struct Comments3View: View {
                             .padding(.leading, 10)
                         }
                         Text("YO...HOW CAN WE PUT A NUMBER ON AI FOOTPRINT THO? ? ITS SO VAGUE???")
-                            .foregroundStyle(.black)
                         .padding()
                     }
+                        .foregroundStyle(.black)
                     , alignment: .leading)
                         
                 }
@@ -58,11 +58,11 @@ struct Comments3View: View {
                                 .fontWeight(.heavy)
                         + Text("PLZ...WDYM BY 'Work like an AI, but not literally.' ? ? ?")
                         }
-                            .foregroundStyle(.black)
                             .padding()
                         
                         
                     }
+                        .foregroundStyle(.black)
                     , alignment: .leading)
                         
                 }
@@ -88,6 +88,7 @@ struct Comments3View: View {
                                 .padding(.trailing, 10)
                         }
                     }
+                        .foregroundStyle(.black)
                     , alignment: .trailing)
                 }
                 .frame(height: 130)
@@ -182,8 +183,8 @@ struct Comments3View: View {
                             .fontWeight(.heavy)
                         }
                         .padding()
-                        .foregroundStyle(.black)
                     }
+                        .foregroundStyle(.black)
                     , alignment: .leading)
                         
                 }

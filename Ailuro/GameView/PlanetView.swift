@@ -22,6 +22,8 @@ struct PlanetView: View {
                 TabView{
                     Tab("How to Play", systemImage: "info.circle"){
                         ZStack{
+                            Color.white
+                                .ignoresSafeArea()
                             Image("off0")
                                 .opacity(0.5)
                             Image("foreOffGround")
@@ -31,15 +33,18 @@ struct PlanetView: View {
                                     .foregroundStyle(.blue)
                                 Text("R U L E S")
                                     .font(.system(size: 25, weight: .heavy, design: .monospaced))
+                                    .foregroundStyle(.black)
                                     .padding(.top, 5)
                                 HStack(alignment: .center){
                                     VStack{
                                         Text("Paw-er:")
                                             .fontWeight(.heavy)
+                                            .foregroundStyle(.black)
                                         Text("Measures")
                                             .foregroundStyle(Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)))
                                         + Text(" work capacity. ")
                                             .fontWeight(.heavy)
+                                            .foregroundStyle(.black)
                                         + Text("Work supports Clean Energy!")
                                             .foregroundStyle(Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)))
 
@@ -48,10 +53,12 @@ struct PlanetView: View {
                                     VStack{
                                         Text("Pawprint:")
                                             .fontWeight(.heavy)
+                                            .foregroundStyle(.black)
                                         Text("Measures ")
                                             .foregroundStyle(Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)))
                                         + Text("environmental cost. ")
                                             .fontWeight(.heavy)
+                                            .foregroundStyle(.black)
                                         + Text("Counteracted by Paw-er.")
                                             .foregroundStyle(Color(#colorLiteral(red: 0.1951702535, green: 0.2001738846, blue: 0.4879345298, alpha: 1)))
                                     }
@@ -107,7 +114,9 @@ struct PlanetView: View {
                                                     .fill(Color.yellow)
                                                     .cornerRadius(20)
                                             Text("Cats have a fixed Pawprint, while AI's is variable. All AILUROs have variable Paw-er Level. Both stats reroll when tapping an AILURO or leaving the page.")
+                                                .foregroundStyle(.black)
                                                 .padding()
+
                                             }
                                         }
                                         
@@ -132,6 +141,7 @@ struct PlanetView: View {
                                                     .fill(Color.yellow)
                                                     .cornerRadius(20)
                                                 Text("Each rolled stat is combined into a megastat for that one AILURO.\nSo, Paw-er & Pawprint each have an absolute Max of 60. (Min: 0, 18, respectively)")
+                                                    .foregroundStyle(.black)
                                                     .padding()
                                             }
                                         }
@@ -149,6 +159,7 @@ struct PlanetView: View {
                                                     .fill(Color.yellow)
                                                     .cornerRadius(20)
                                                 Text("If >50% of Paw-er comes from an AI, cats in the Paw-ffice will look demotivated. (Reflects the psychological impact of pawning work off to AI!)")
+                                                    .foregroundStyle(.black)
                                                     .padding()
                                             }
                                         }
@@ -165,6 +176,7 @@ struct PlanetView: View {
                                                     .fill(Color.yellow)
                                                     .cornerRadius(20)
                                                 Text("Though Paw-er strengthens Clean Energy sources and can counteract Pawprint, it cannot if Pawprint >40. \nReflects how Clean Energy is finite, and Fossil Fuels are still crucial for heavy reliance on AI (& data centers).")
+                                                    .foregroundStyle(.black)
                                                     .padding()
                                             }
                                         }
@@ -205,6 +217,7 @@ struct PlanetView: View {
                         OfficeView()
                     }
                 }
+            
                 
             }
         .tabViewStyle(DefaultTabViewStyle())
