@@ -114,6 +114,7 @@ struct Page2View: View {
                 .frame(width: 300, height: 750)
             }
         }
+        .foregroundStyle(.black)
     }
 }
 
